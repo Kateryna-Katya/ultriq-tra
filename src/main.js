@@ -1,11 +1,11 @@
 /**
- * ORION SPARKX — Official Engine 2026
- * Чистый JS для высокой производительности
+ * ULTRIQ TRA — Official Engine 2026
+ * Czysty JS dla wysokiej wydajności
  */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // --- 1. НАВИГАЦИЯ И МОБИЛЬНОЕ МЕНЮ ---
+  // --- 1. NAWIGACJA I MENU MOBILNE ---
   const header = document.querySelector('.header');
   const burger = document.getElementById('burger');
   const mobileMenu = document.getElementById('mobile-menu');
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggleMenu = () => {
       burger.classList.toggle('burger--active');
       mobileMenu.classList.toggle('mobile-menu--open');
-      // Блокируем скролл при открытом меню
+      // Blokada scrolla przy otwartym menu
       document.body.style.overflow = mobileMenu.classList.contains('mobile-menu--open') ? 'hidden' : '';
   };
 
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   });
 
-  // Изменение хедера при скролле
+  // Zmiana headera przy scrollu
   window.addEventListener('scroll', () => {
       if (window.scrollY > 50) {
           header.classList.add('header--scrolled');
@@ -38,25 +38,24 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  // --- 2. АНИМАЦИЯ ПОЯВЛЕНИЯ (SCROLL REVEAL) ---
+  // --- 2. ANIMACJA POJAWIANIA SIĘ (SCROLL REVEAL) ---
   const revealElements = document.querySelectorAll('.reveal');
 
   const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
           if (entry.isIntersecting) {
               entry.target.classList.add('reveal--active');
-              // После активации можно прекратить наблюдение за элементом
               revealObserver.unobserve(entry.target);
           }
       });
   }, {
-      threshold: 0.15 // Элемент появится, когда 15% его площади будет в кадре
+      threshold: 0.15
   });
 
   revealElements.forEach(el => revealObserver.observe(el));
 
 
-  // --- 3. ИНТЕРАКТИВ HERO-СЕКЦИИ (PARALLAX) ---
+  // --- 3. INTERAKTYWNA SEKCJA HERO (PARALLAX) ---
   const hero = document.querySelector('.hero');
   const heroVisual = document.querySelector('.hero__visual');
 
@@ -69,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  // --- 4. ПЛАВНЫЙ СКРОЛЛ ПО ЯКОРЯМ ---
+  // --- 4. PŁYNNY SCROLL DO KOTWIC ---
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
           const targetId = this.getAttribute('href');
@@ -92,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  // --- 5. КОНТАКТНАЯ ФОРМА И КАПЧА ---
+  // --- 5. FORMULARZ KONTAKTOWY I CAPTCHA ---
   const contactForm = document.getElementById('main-form');
   if (contactForm) {
       const phoneInput = document.getElementById('phone-input');
@@ -100,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const captchaInput = document.getElementById('captcha-answer');
       let captchaResult;
 
-      // Генерация простого математического примера
+      // Generowanie prostego przykładu matematycznego
       const generateCaptcha = () => {
           const a = Math.floor(Math.random() * 10) + 1;
           const b = Math.floor(Math.random() * 10) + 1;
@@ -110,12 +109,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       generateCaptcha();
 
-      // Валидация телефона (только цифры)
+      // Walidacja telefonu (tylko cyfry)
       phoneInput.addEventListener('input', (e) => {
           e.target.value = e.target.value.replace(/[^0-9]/g, '');
       });
 
-      // Обработка отправки (Mock AJAX)
+      // Obsługa wysyłki (Mock AJAX)
       contactForm.addEventListener('submit', (e) => {
           e.preventDefault();
 
@@ -123,30 +122,30 @@ document.addEventListener('DOMContentLoaded', () => {
           const errorMsg = document.getElementById('form-error');
           const submitBtn = document.getElementById('submit-btn');
 
-          // Сброс сообщений
+          // Reset komunikatów
           successMsg.style.display = 'none';
           errorMsg.style.display = 'none';
 
-          // Проверка капчи
+          // Sprawdzenie captcha
           if (parseInt(captchaInput.value) !== captchaResult) {
-              errorMsg.textContent = 'Неверный ответ на капчу. Попробуйте еще раз.';
+              errorMsg.textContent = 'Błędny wynik captcha. Spróbuj ponownie.';
               errorMsg.style.display = 'block';
               generateCaptcha();
               captchaInput.value = '';
               return;
           }
 
-          // Имитация загрузки
+          // Imitacja ładowania
           const originalBtnText = submitBtn.innerHTML;
           submitBtn.disabled = true;
-          submitBtn.innerHTML = '<span>Отправка...</span>';
+          submitBtn.innerHTML = '<span>Wysyłanie...</span>';
 
           setTimeout(() => {
-              // Скрываем форму, показываем успех
+              // Ukrywamy przycisk, pokazujemy sukces
               submitBtn.style.display = 'none';
               successMsg.style.display = 'block';
               contactForm.reset();
-              console.log("Данные формы отправлены успешно (имитация)");
+              console.log("Dane formularza wysłane pomyślnie (imitacja)");
           }, 1800);
       });
   }
@@ -157,15 +156,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const cookieAccept = document.getElementById('cookie-accept');
 
   if (cookiePopup && cookieAccept) {
-      // Проверяем, было ли уже дано согласие
-      if (!localStorage.getItem('orion_cookies_accepted')) {
+      // Sprawdzamy, czy zgoda została już udzielona
+      if (!localStorage.getItem('ultriq_cookies_accepted')) {
           setTimeout(() => {
               cookiePopup.classList.add('cookie-popup--show');
           }, 3000);
       }
 
       cookieAccept.addEventListener('click', () => {
-          localStorage.setItem('orion_cookies_accepted', 'true');
+          localStorage.setItem('ultriq_cookies_accepted', 'true');
           cookiePopup.classList.remove('cookie-popup--show');
       });
   }
